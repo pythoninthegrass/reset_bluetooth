@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# ToDo:
+# Needs error handling for that rare possibility Bluetooth PLISTs
+# don't exist and will exit 1 the whole script.
 
 # Current user
 loggedInUser=/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }'\
