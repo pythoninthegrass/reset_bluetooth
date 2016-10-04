@@ -5,7 +5,7 @@
 # don't exist and will exit 1 the whole script.
 
 # Current user
-loggedInUser=/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }'\
+loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
 
 # Remove Bluetooth PLISTs
 cd /Library/Preferences/
