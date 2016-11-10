@@ -11,6 +11,11 @@ loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
 cd /Library/Preferences/
 #ls | grep com.apple.Bluetooth*
 sudo rm -f com.apple.Bluetooth.plist
+sudo rm -f com.apple.driver.AppleBluetoothMultitouch.trackpad.plist
+sudo rm -f com.apple.driver.AppleBluetoothMultitouch.mouse.plist
+sudo rm -f com.apple.driver.AppleHIDMouse.plist
+sudo rm -f com.apple.AppleMultitouchTrackpad.plist
+sudo rm -f com.apple.preference.trackpad.plist
 
 cd $loggedInUser/Library/Preferences/ByHost/
 #ls | grep com.apple.Bluetooth*
