@@ -25,5 +25,5 @@ sudo rm -f com.apple.Bluetooth.*
 
 # Reboot
 echo "Restarting now. Hit CTRL-C to cancel."
-sleep 10s
+sleep 5s
 sudo reboot
