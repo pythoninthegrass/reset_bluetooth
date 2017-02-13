@@ -22,7 +22,12 @@ fi
 
 # PLISTs
 declare -a plistsArray=(
-    com.apple.Bluetooth.plist com.apple.driver.AppleBluetoothMultitouch.trackpad.plist com.apple.driver.AppleBluetoothMultitouch.mouse.plist com.apple.driver.AppleHIDMouse.plist com.apple.AppleMultitouchTrackpad.plist com.apple.preference.trackpad.plist
+    com.apple.Bluetooth.plist
+    com.apple.driver.AppleBluetoothMultitouch.trackpad.plist
+    com.apple.driver.AppleBluetoothMultitouch.mouse.plist
+    com.apple.driver.AppleHIDMouse.plist
+    com.apple.AppleMultitouchTrackpad.plist
+    com.apple.preference.trackpad.plist
 )
 # echo $plistsArray
 
