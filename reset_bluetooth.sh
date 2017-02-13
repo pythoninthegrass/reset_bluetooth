@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# CREDIT: supercoffee (AKA Ben) fixed my for loop modified from https://www.cyberciti.biz/faq/use-a-for-loop-to-remove-file-in-unix/ and http://stackoverflow.com/a/20203051. He also added the "declare" bit for the plistsArray.
 
 # Current user
 loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
