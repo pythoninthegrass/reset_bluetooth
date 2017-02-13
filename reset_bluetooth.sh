@@ -1,11 +1,12 @@
 #!/bin/sh
 
-# ToDo:
-# Needs error handling for that rare possibility Bluetooth PLISTs
-# don't exist and will exit 1 the whole script.
+# CREDIT: supercoffee (AKA Ben) fixed my for loop modified from https://www.cyberciti.biz/faq/use-a-for-loop-to-remove-file-in-unix/ and http://stackoverflow.com/a/20203051. He also added the "declare" bit for the plistsArray.
 
 # Current user
 loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
+
+# Working directory
+scriptDir=$(cd "$(dirname "$0")" && pwd)
 
 # Logging
 logTime=$(date +%Y-%m-%d:%H:%M:%S)
@@ -20,21 +21,22 @@ if [ $(whoami) != "root" ]; then
     exit 1
 fi
 
+# PLISTs
+declare -a plistsArray=(
+    com.apple.Bluetooth.plist com.apple.driver.AppleBluetoothMultitouch.trackpad.plist com.apple.driver.AppleBluetoothMultitouch.mouse.plist com.apple.driver.AppleHIDMouse.plist com.apple.AppleMultitouchTrackpad.plist com.apple.preference.trackpad.plist
+)
+# echo $plistsArray
+
 # Remove Bluetooth PLISTs
 cd /Library/Preferences/
-#ls | grep com.apple.Bluetooth*
-sudo rm -f com.apple.Bluetooth.plist
-sudo rm -f com.apple.driver.AppleBluetoothMultitouch.trackpad.plist
-sudo rm -f com.apple.driver.AppleBluetoothMultitouch.mouse.plist
-sudo rm -f com.apple.driver.AppleHIDMouse.plist
-sudo rm -f com.apple.AppleMultitouchTrackpad.plist
-sudo rm -f com.apple.preference.trackpad.plist
+for f in "${plistsArray[@]}"; do
+    echo "Removed $f."
+    [ -f "$f" ] && rm -f "$f"
+done
 
 cd $loggedInUser/Library/Preferences/ByHost/
-#ls | grep com.apple.Bluetooth*
-#com.apple.Bluetooth.0116EA47-39C0-5A5F-A7C6-1E9F6B818086.plist
-sudo rm -f com.apple.Bluetooth.*
-#ls | grep com.apple.Bluetooth*
+# e.g., com.apple.Bluetooth.0116EA47-39C0-5A5F-A7C6-1E9F6B818086.plist
+rm -f com.apple.Bluetooth.*
 
 # Reboot
 echo "Restarting now. Hit CTRL-C to cancel."
