@@ -7,6 +7,13 @@
 # Current user
 loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
 
+# Logging
+logTime=$(date +%Y-%m-%d:%H:%M:%S)
+resetLog="/tmp/resetLog_$logTime.log"
+exec 1>>$resetLog
+# Redirect STDERR to STDOUT
+exec 2>&1
+
 # Remove Bluetooth PLISTs
 cd /Library/Preferences/
 #ls | grep com.apple.Bluetooth*
