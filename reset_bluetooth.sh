@@ -14,6 +14,12 @@ exec 1>>$resetLog
 # Redirect STDERR to STDOUT
 exec 2>&1
 
+# Check for root privileges
+if [ $(whoami) != "root" ]; then
+    echo "Sorry, you need super user privileges to run this script."
+    exit 1
+fi
+
 # Remove Bluetooth PLISTs
 cd /Library/Preferences/
 #ls | grep com.apple.Bluetooth*
