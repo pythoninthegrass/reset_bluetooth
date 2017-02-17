@@ -1,18 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
+
+# Exit upon failed command
+# set -e
+
+# Logs
+logTime=$(date +%Y-%m-%d:%H:%M:%S)
+resetLog="/tmp/pkg_install_$logTime.log"
+exec &> >(tee -a "$resetLog")
 
 # Current user
 loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
 
 # Working directory
 scriptDir=$(cd "$(dirname "$0")" && pwd)
-
-# Logging
-logTime=$(date +%Y-%m-%d:%H:%M:%S)
-resetLog="/tmp/resetLog_$logTime.log"
-exec 1>>$resetLog
-# Redirect STDERR to STDOUT
-exec 2>&1
 
 # Check for root privileges
 if [ $(whoami) != "root" ]; then
