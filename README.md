@@ -8,7 +8,7 @@ Tired of deleting Bluetooth PLISTs by hand.
 * Ben Daschel @ https://github.com/supercoffee fixed my for loop modified from https://www.cyberciti.biz/faq/use-a-for-loop-to-remove-file-in-unix/ and http://stackoverflow.com/a/20203051. He also added the "declare" bit for the plistsArray.
 
 
-##Notes##
+## Notes ##
 Took some spare parts from other websites and wrapped them into a functional shell script. Open to suggestions on how to improve.
 
 Save your work. Needs to restart at the end of the script. Interestingly, it doesn’t need to re-pair previous devices upon reboot. 
