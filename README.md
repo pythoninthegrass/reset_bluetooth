@@ -1,7 +1,7 @@
 # reset_bluetooth
 Tired of deleting Bluetooth PLISTs by hand.
 
-##CREDIT:##
+## CREDIT ##
 * Logged In User @ https://www.jamf.com/jamf-nation/discussions/12769/getting-the-currently-logged-in-user
 * PLIST listing @ http://macid.co/blog/2015/11/05/resetting-bluetooth-on-os-x/
 * Aaron Pollack for encouraging me to unlock the repo for the world to reset their Bluetooth functionality.
