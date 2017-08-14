@@ -6,17 +6,17 @@
 
 # Logs
 logTime=$(date +%Y-%m-%d:%H:%M:%S)
-resetLog="/tmp/pkg_install_$logTime.log"
+resetLog="/tmp/$(basename "$0" | cut -d. -f1)_$logTime.log"
 exec &> >(tee -a "$resetLog")
 
 # Current user
-loggedInUser=$(ls -l /dev/console | cut -d " " -f 4)
+loggedInUser=$(stat -f%Su /dev/console)
 
 # Working directory
 scriptDir=$(cd "$(dirname "$0")" && pwd)
 
 # Check for root privileges
-if [ $(whoami) != "root" ]; then
+if [[ "$(whoami)" != "root" ]]; then
     echo "Sorry, you need super user privileges to run this script."
     exit 1
 fi
@@ -33,17 +33,19 @@ declare -a plistsArray=(
 # echo $plistsArray
 
 # Remove Bluetooth PLISTs
-cd /Library/Preferences/
+cd /Library/Preferences/ || exit
 for f in "${plistsArray[@]}"; do
     echo "Removed $f."
-    [ -f "$f" ] && rm -f "$f"
+    [[ -f "$f" ]] && rm -f "$f"
 done
 
-cd $loggedInUser/Library/Preferences/ByHost/
+cd /Users/$loggedInUser/Library/Preferences/ByHost/ || exit
 # e.g., com.apple.Bluetooth.0116EA47-39C0-5A5F-A7C6-1E9F6B818086.plist
 rm -f com.apple.Bluetooth.*
 
 # Reboot
-echo "Restarting now. Hit CTRL-C to cancel."
-sleep 5s
-sudo reboot
+read -r -p "Do you want to reboot now to finish installing updates? [Y/n]" response
+response=${response,,} # tolower
+    if [[ $response =~ ^(yes|y| ) ]]; then
+        shutdown -r now
+    fi
